@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Go匿名函数," />
+  <meta name="keywords" content="Maven,构建,依赖管理,约定优于配置," />
 
 
 
@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="GO语言的匿名函数就是闭包基本概念&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;闭包是可以包含自由（未绑定到特定对象）变量的代码块，这些变量不在这个代码块内或者任何全局上下文中定义，而是在定义代码块的环境中定义。要执行的代码块（由于自由变量包含&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在代码块中，所以这些自由变量以及它们引用的对象没有被释放）">
-<meta name="keywords" content="Go匿名函数">
+<meta name="description" content="Maven是什么？ Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation fr">
+<meta name="keywords" content="Maven,构建,依赖管理,约定优于配置">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Go匿名函数">
-<meta property="og:url" content="http://www.ycyoes.com/2017/06/17/Go匿名函数/index.html">
+<meta property="og:title" content="Maven概述（一）">
+<meta property="og:url" content="http://www.ycyoes.com/2017/08/08/Maven概述（一）/index.html">
 <meta property="og:site_name" content="ycyoes&#39;s blog">
-<meta property="og:description" content="GO语言的匿名函数就是闭包基本概念&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;闭包是可以包含自由（未绑定到特定对象）变量的代码块，这些变量不在这个代码块内或者任何全局上下文中定义，而是在定义代码块的环境中定义。要执行的代码块（由于自由变量包含&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在代码块中，所以这些自由变量以及它们引用的对象没有被释放）">
+<meta property="og:description" content="Maven是什么？ Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation fr">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-15T02:31:07.257Z">
+<meta property="og:updated_time" content="2017-08-15T04:27:26.772Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Go匿名函数">
-<meta name="twitter:description" content="GO语言的匿名函数就是闭包基本概念&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;闭包是可以包含自由（未绑定到特定对象）变量的代码块，这些变量不在这个代码块内或者任何全局上下文中定义，而是在定义代码块的环境中定义。要执行的代码块（由于自由变量包含&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;在代码块中，所以这些自由变量以及它们引用的对象没有被释放）">
+<meta name="twitter:title" content="Maven概述（一）">
+<meta name="twitter:description" content="Maven是什么？ Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation fr">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ycyoes.com/2017/06/17/Go匿名函数/"/>
+  <link rel="canonical" href="http://www.ycyoes.com/2017/08/08/Maven概述（一）/"/>
 
 
 
 
 
-  <title>Go匿名函数 | ycyoes's blog</title>
+  <title>Maven概述（一） | ycyoes's blog</title>
   
 
 
@@ -293,7 +293,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ycyoes.com/2017/06/17/Go匿名函数/">
+    <link itemprop="mainEntityOfPage" href="http://www.ycyoes.com/2017/08/08/Maven概述（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ycyoes">
@@ -310,7 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Go匿名函数</h1>
+          <h1 class="post-title" itemprop="name headline">Maven概述（一）</h1>
         
 
         <div class="post-meta">
@@ -322,8 +322,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-17T00:00:00+08:00">
-                2017-06-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-08T23:32:46+08:00">
+                2017-08-08
               </time>
             
 
@@ -345,8 +345,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Go/" itemprop="url" rel="index">
-                    <span itemprop="name">Go</span>
+                  <a href="/categories/Maven/" itemprop="url" rel="index">
+                    <span itemprop="name">Maven</span>
                   </a>
                 </span>
 
@@ -364,8 +364,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/06/17/Go匿名函数/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/17/Go匿名函数/" itemprop="commentsCount"></span>
+                <a href="/2017/08/08/Maven概述（一）/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/08/08/Maven概述（一）/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -373,7 +373,7 @@
 
           
           
-             <span id="/2017/06/17/Go匿名函数/" class="leancloud_visitors" data-flag-title="Go匿名函数">
+             <span id="/2017/08/08/Maven概述（一）/" class="leancloud_visitors" data-flag-title="Maven概述（一）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,20 +404,73 @@
       
 
       
-        <h1 id="GO语言的匿名函数就是闭包"><a href="#GO语言的匿名函数就是闭包" class="headerlink" title="GO语言的匿名函数就是闭包"></a>GO语言的匿名函数就是闭包</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;闭包是可以包含自由（未绑定到特定对象）变量的代码块，这些变量不在这个代码块内或者任何全局上下文中定义，而是在定义代码块的环境中定义。要执行的代码块（由于自由变量包含<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在代码块中，所以这些自由变量以及它们引用的对象没有被释放）为自由变量提供绑定的计算环境（作用域）。</p>
-<h2 id="闭包的价值"><a href="#闭包的价值" class="headerlink" title="闭包的价值"></a>闭包的价值</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;闭包的价值在于可以作为函数对象或者匿名函数，对于类型系统而言，这意味着不仅要表示数据还要表示代码。支持闭包的多数语言都将函数作为第一级对象，就是说这些函数可以存储到<br>变量中作为参数传递给其他函数，最重要的是能够被函数动态创建和返回。<br><a id="more"></a></p>
-<h2 id="Go语言中的闭包"><a href="#Go语言中的闭包" class="headerlink" title="Go语言中的闭包"></a>Go语言中的闭包</h2><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Go语言中的闭包同样也会引用到函数外的变量。闭包的实现确保只要闭包还被使用，那么被闭包引用的变量会一直存在。例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// closure.go</span></div><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">    <span class="string">"fmt"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">var</span> j <span class="keyword">int</span> = <span class="number">5</span></div><div class="line"></div><div class="line">    a := <span class="function"><span class="keyword">func</span><span class="params">()</span> <span class="title">func</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">var</span> i <span class="keyword">int</span> = <span class="number">10</span></div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</div><div class="line">            fmt.Printf(<span class="string">"i, j: %d, %d\n"</span>, i, j)</div><div class="line">        &#125;</div><div class="line">    &#125;()　　<span class="comment">//末尾的括号表明匿名函数被调用，并将返回的函数指针赋给变量a</span></div><div class="line"></div><div class="line">    a()</div><div class="line"></div><div class="line">    j *= <span class="number">2</span></div><div class="line"></div><div class="line">    a()</div><div class="line">&#125;</div><div class="line"></div><div class="line">输出：</div><div class="line">i, j: <span class="number">10</span>, <span class="number">5</span></div><div class="line">i, j: <span class="number">10</span>, <span class="number">10</span></div></pre></td></tr></table></figure></p>
-<h1 id="Go语言支持匿名函数，即函数可以像普通变量一样被传递或使用。"><a href="#Go语言支持匿名函数，即函数可以像普通变量一样被传递或使用。" class="headerlink" title="Go语言支持匿名函数，即函数可以像普通变量一样被传递或使用。"></a>Go语言支持匿名函数，即函数可以像普通变量一样被传递或使用。</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;闭包是“函数”和“引用环境”组成的整体。<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">anonymous</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="title">func</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</div><div class="line">        n++ <span class="comment">//对外部变量加1</span></div><div class="line">        fmt.Println(n)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">anonymous2</span><span class="params">(n <span class="keyword">int</span>)</span> <span class="title">func</span><span class="params">()</span></span> &#123;</div><div class="line">    sum := n</div><div class="line">    a := <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123; <span class="comment">//把匿名函数作为值赋给变量a(Go不允许函数嵌套，但你可以利用匿名函数实现函数嵌套)</span></div><div class="line">        fmt.Println(sum + <span class="number">1</span>) <span class="comment">//调用本函数外的变量，这里没有()匿名函数不会马上执行</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> a</div><div class="line">&#125;</div><div class="line"></div><div class="line">　　fmt.Println(<span class="string">"---------anonymous func--------"</span>)</div><div class="line">    anony := anonymous(<span class="number">10</span>)</div><div class="line">    anony()</div><div class="line">    anony1 := anonymous(<span class="number">20</span>)</div><div class="line">    anony1()</div><div class="line">    <span class="comment">/**</span></div><div class="line"><span class="comment">    *再次调用anony()函数，结果是12，由此得出以下两点</span></div><div class="line"><span class="comment">    * 1、内函数对外函数的变量的修改，是对变量的引用</span></div><div class="line"><span class="comment">    * 2、变量被引用后，它所在的函数结束，该变量不会马上销毁</span></div><div class="line"><span class="comment">    **/</span></div><div class="line">    anony()</div><div class="line">    anony1()</div><div class="line">    fmt.Println(<span class="string">"---------anonymous2----------"</span>)</div><div class="line">    an := anonymous2(<span class="number">10</span>)</div><div class="line">    an()</div><div class="line">    an2 := anonymous2(<span class="number">20</span>)</div><div class="line">    an2()</div><div class="line">    an()</div><div class="line">    an2()</div><div class="line">    </div><div class="line">	输出：</div><div class="line"></div><div class="line">	---------anonymous <span class="function"><span class="keyword">func</span>--------</span></div><div class="line"><span class="function">	11</span></div><div class="line"><span class="function">	21</span></div><div class="line"><span class="function">	12</span></div><div class="line"><span class="function">	22</span></div><div class="line"><span class="function">	---------<span class="title">anonymous2</span>----------</span></div><div class="line"><span class="function">	11</span></div><div class="line"><span class="function">	21</span></div><div class="line"><span class="function">	11</span></div><div class="line"><span class="function">	21</span></div></pre></td></tr></table></figure></p>
-<p><strong>闭包函数出现的条件：</strong><br>1.被嵌套的函数引用到非本函数的外部变量，而且这外部变量不是“全局变量”;<br>2.嵌套的函数被独立了出来(被父函数返回或赋值 变成了独立的个体)，  而被引用的变量所在的父函数已结束。<br>对象是附有行为的数据，而闭包是附有数据的行为。</p>
-<h1 id="匿名函数执行"><a href="#匿名函数执行" class="headerlink" title="匿名函数执行"></a>匿名函数执行</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;匿名函数最后括号中加参数，匿名函数立即执行，没有括号或括号中为空，则需要传参。例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">fmt.Println(<span class="string">"-----------匿名函数的执行----------"</span>)</div><div class="line">    m, n := <span class="function"><span class="keyword">func</span><span class="params">(i, j <span class="keyword">int</span>)</span> <span class="params">(m, n <span class="keyword">int</span>)</span></span> &#123; <span class="comment">// x y 为函数返回值</span></div><div class="line">        <span class="keyword">return</span> j, i</div><div class="line">    &#125;(<span class="number">1</span>, <span class="number">9</span>) <span class="comment">// 直接创建匿名函数并执行</span></div><div class="line"></div><div class="line">    fmt.Println(m, n)</div><div class="line"></div><div class="line">    f := <span class="function"><span class="keyword">func</span><span class="params">(i, j <span class="keyword">int</span>)</span> <span class="params">(result <span class="keyword">int</span>)</span></span> &#123; <span class="comment">// f 为函数地址</span></div><div class="line">        result = i + j</div><div class="line">        <span class="keyword">return</span> result</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    fmt.Println(f(<span class="number">1</span>, <span class="number">2</span>))</div><div class="line">    </div><div class="line">输出：</div><div class="line">-----------匿名函数的执行----------</div><div class="line"><span class="number">9</span> <span class="number">1</span></div><div class="line"><span class="number">3</span></div></pre></td></tr></table></figure></p>
-<h1 id="错误：-expression-in-go-defer-must-be-function-call"><a href="#错误：-expression-in-go-defer-must-be-function-call" class="headerlink" title="错误： expression in go/defer must be function call"></a>错误： expression in go/defer must be function call</h1><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;go关键字后跟匿名函数报错： expression in go/defer must be function call，在匿名函数后加括号则可。例：<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">smtp</span><span class="params">()</span> <span class="title">error</span></span> &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">&#125;</div><div class="line">　　<span class="keyword">go</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</div><div class="line">       err := smtp()</div><div class="line">       <span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</div><div class="line">           fmt.Printf(err.Error())</div><div class="line">       &#125;</div><div class="line">   &#125;()</div></pre></td></tr></table></figure></p>
-<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;若去掉上面代码中的空括号会报错。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;加()封装成表达式。</p>
-<p><strong>参考资料：</strong></p>
-<ol>
-<li><a href="http://blog.sina.com.cn/s/blog_487109d101018fcx.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_487109d101018fcx.html</a></li>
-<li><a href="http://www.golangtc.com/t/5325047a320b523f0a00008b" target="_blank" rel="external">http://www.golangtc.com/t/5325047a320b523f0a00008b</a></li>
-<li>《GO语言编程》</li>
-<li><a href="http://www.cnblogs.com/ruixiazhixia/p/6024758.html" target="_blank" rel="external">http://www.cnblogs.com/ruixiazhixia/p/6024758.html</a></li>
+        <h2 id="Maven是什么？"><a href="#Maven是什么？" class="headerlink" title="Maven是什么？"></a>Maven是什么？</h2><blockquote>
+<p>Apache Maven is a software project management and comprehension tool. Based on the concept of a project object model (POM), Maven can manage a project’s build, reporting and documentation from a central piece of information.<br>（Apache Maven是一个软件项目管理和理解工具。基于项目对象模型思想，Maven可以管理一个项目的构建、报告和信息中心文档）<br><a id="more"></a><br>Maven 是一个项目管理和整合工具。作为Apache组织中的一个颇为成功的开源项目，Maven主要服务于基于Java平台的项目构建、依赖管理和项目信息管理。无论是小型的开源类库项目，还是大型的企业级应用；无论是传统的瀑布式开发，还是流行的敏捷模式，Maven都能大显身手。  </p>
+<p>Maven为开发者提供了一套完整的构建生命周期框架。开发团队几乎不用花多少时间就能够自动完成工程的基础构建配置，因为Maven使用了一个标准的目录结构和一个默认的构建生命周期。  </p>
+</blockquote>
+<p><strong>Maven能够帮助开发者完成以下工作：</strong>   </p>
+<ul>
+<li>构建</li>
+<li>文档生成</li>
+<li>报告</li>
+<li>依赖</li>
+<li>SCMs</li>
+<li>发布</li>
+<li>分发</li>
+<li>邮件列表<blockquote>
+<p>总的来说，Maven简化了工程的构建过程，并对其标准化。它无缝衔接了编译、发布、文档生成、团队合作和其他任务。Maven提高了重用性，负责了大部分构建相关任务。  </p>
+</blockquote>
+</li>
+</ul>
+<h2 id="Maven的目标"><a href="#Maven的目标" class="headerlink" title="Maven的目标"></a>Maven的目标</h2><blockquote>
+<p>Maven的主要目的是为开发者提供</p>
+<ul>
+<li>一个可复用、可维护、更易理解的工程综合模型</li>
+<li>与这个模型交互的插件或者工具<br>Maven工程结构和内容被定义在一个xml文件中-pom.xml,是Project Object Model(POM)的简称，此文件是整个Maven系统的基础组件。  </li>
+</ul>
+</blockquote>
+<h2 id="约定优于配置"><a href="#约定优于配置" class="headerlink" title="约定优于配置"></a>约定优于配置</h2><blockquote>
+<p>Maven使用约定而不是配置，意味着开发者不需要再自己创建构建过程。<br>开发者不需要再关心每一个配置细节。Maven为工程提供了合理的默认行为。当创建Maven工程时，Maven会创建默认的工程结构。开发者只需要合理的放置文件，而在pom.xml中不再需要定义任何配置。</p>
+<p>下表展示了工程源码文件、资源文件的默认配置，和其他一些配置。假定${basedir}表示工程目录：</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>配置项</th>
+<th>默认值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>source code</td>
+<td>${basedir}/src/main/java</td>
+</tr>
+<tr>
+<td>resources</td>
+<td>${basedir}/src/main/resources</td>
+</tr>
+<tr>
+<td>Tests</td>
+<td>${basedir}/src/test</td>
+</tr>
+<tr>
+<td>Complied byte code</td>
+<td>${basedir}/target</td>
+</tr>
+<tr>
+<td>distributable JAR</td>
+<td>${basedir}/target/classes</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>为了构建工程，Maven为开发者提供了选项来配置生命周期目标和工程依赖（依赖于Maven的插件扩展功能和默认的约定）。大部分的工程管理和构建相关的任务是由Maven插件完成的。</p>
+<p>开发人员不需要了解每个插件是如何工作的，就能够构建任何给定的Maven工程。详细内容参考Maven插件部分。</p>
+</blockquote>
+<h2 id="参考资料："><a href="#参考资料：" class="headerlink" title="参考资料："></a>参考资料：</h2><ol>
+<li><a href="http://maven.apache.org/" target="_blank" rel="external">http://maven.apache.org/</a></li>
+<li>《Maven实战》 徐晓斌 著；</li>
+<li>《Maven教程》 极客学院；</li>
 </ol>
 
       
@@ -473,7 +526,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Go匿名函数/" rel="tag"># Go匿名函数</a>
+            <a href="/tags/Maven/" rel="tag"># Maven</a>
+          
+            <a href="/tags/构建/" rel="tag"># 构建</a>
+          
+            <a href="/tags/依赖管理/" rel="tag"># 依赖管理</a>
+          
+            <a href="/tags/约定优于配置/" rel="tag"># 约定优于配置</a>
           
         </div>
       
@@ -486,8 +545,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/16/网络层的功能/" rel="next" title="网络层的功能">
-                <i class="fa fa-chevron-left"></i> 网络层的功能
+              <a href="/2017/08/05/并发程序开发及优化之不变模式/" rel="next" title="并发程序开发及优化之不变模式">
+                <i class="fa fa-chevron-left"></i> 并发程序开发及优化之不变模式
               </a>
             
           </div>
@@ -496,8 +555,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/06/19/Tomcat部署多个项目及相关配置/" rel="prev" title="Tomcat部署多个项目及相关配置">
-                Tomcat部署多个项目及相关配置 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/08/13/Maven环境配置及简单使用（二）/" rel="prev" title="Maven环境配置及简单使用（二）">
+                Maven环境配置及简单使用（二） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -672,7 +731,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GO语言的匿名函数就是闭包"><span class="nav-number">1.</span> <span class="nav-text">GO语言的匿名函数就是闭包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包的价值"><span class="nav-number">1.2.</span> <span class="nav-text">闭包的价值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Go语言中的闭包"><span class="nav-number">1.3.</span> <span class="nav-text">Go语言中的闭包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Go语言支持匿名函数，即函数可以像普通变量一样被传递或使用。"><span class="nav-number">2.</span> <span class="nav-text">Go语言支持匿名函数，即函数可以像普通变量一样被传递或使用。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#匿名函数执行"><span class="nav-number">3.</span> <span class="nav-text">匿名函数执行</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#错误：-expression-in-go-defer-must-be-function-call"><span class="nav-number">4.</span> <span class="nav-text">错误： expression in go/defer must be function call</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven是什么？"><span class="nav-number">1.</span> <span class="nav-text">Maven是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Maven的目标"><span class="nav-number">2.</span> <span class="nav-text">Maven的目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#约定优于配置"><span class="nav-number">3.</span> <span class="nav-text">约定优于配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料："><span class="nav-number">4.</span> <span class="nav-text">参考资料：</span></a></li></ol></div>
             
 
           </div>
