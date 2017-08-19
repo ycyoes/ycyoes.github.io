@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Tomcat,配置,运维,多个项目," />
+  <meta name="keywords" content="Go,构建,运行,命名空间,编译,兼容性,可读性," />
 
 
 
@@ -94,18 +94,22 @@
 
 
 
-<meta name="description" content="配置多个项目　　在tomcat的conf目录下，找到server.xml,在其中添加节点即可进行多个项目的部署.">
-<meta name="keywords" content="Tomcat,配置,运维,多个项目">
+<meta name="description" content="&amp;emsp;原文地址： https://www.goinggo.net/2013/07/how-packages-work-in-go-language.html&amp;emsp;自从开始用Go编程，如何最好的组织我的代码和使用package这个关键词对我来说很神秘。package关键字类似于C#中使用的namespace，通常将包名和目录结构绑定。Go有如下web页面尝试解释如何编写Go代码：http">
+<meta name="keywords" content="Go,构建,运行,命名空间,编译,兼容性,可读性">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tomcat部署多个项目及相关配置">
-<meta property="og:url" content="http://www.ycyoes.com/2017/06/19/Tomcat部署多个项目及相关配置/index.html">
+<meta property="og:title" content="Go包运行机制">
+<meta property="og:url" content="http://www.ycyoes.com/2017/08/18/Go包运行机制/index.html">
 <meta property="og:site_name" content="ycyoes&#39;s blog">
-<meta property="og:description" content="配置多个项目　　在tomcat的conf目录下，找到server.xml,在其中添加节点即可进行多个项目的部署.">
+<meta property="og:description" content="&amp;emsp;原文地址： https://www.goinggo.net/2013/07/how-packages-work-in-go-language.html&amp;emsp;自从开始用Go编程，如何最好的组织我的代码和使用package这个关键词对我来说很神秘。package关键字类似于C#中使用的namespace，通常将包名和目录结构绑定。Go有如下web页面尝试解释如何编写Go代码：http">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-15T04:27:26.663Z">
+<meta property="og:image" content="http://ou37fuqh7.bkt.clouddn.com/go_package.png">
+<meta property="og:image" content="http://ou37fuqh7.bkt.clouddn.com/GOPATH.png">
+<meta property="og:image" content="http://ou37fuqh7.bkt.clouddn.com/go_builtin.png">
+<meta property="og:updated_time" content="2017-08-19T01:19:51.375Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tomcat部署多个项目及相关配置">
-<meta name="twitter:description" content="配置多个项目　　在tomcat的conf目录下，找到server.xml,在其中添加节点即可进行多个项目的部署.">
+<meta name="twitter:title" content="Go包运行机制">
+<meta name="twitter:description" content="&amp;emsp;原文地址： https://www.goinggo.net/2013/07/how-packages-work-in-go-language.html&amp;emsp;自从开始用Go编程，如何最好的组织我的代码和使用package这个关键词对我来说很神秘。package关键字类似于C#中使用的namespace，通常将包名和目录结构绑定。Go有如下web页面尝试解释如何编写Go代码：http">
+<meta name="twitter:image" content="http://ou37fuqh7.bkt.clouddn.com/go_package.png">
 
 
 
@@ -134,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://www.ycyoes.com/2017/06/19/Tomcat部署多个项目及相关配置/"/>
+  <link rel="canonical" href="http://www.ycyoes.com/2017/08/18/Go包运行机制/"/>
 
 
 
 
 
-  <title>Tomcat部署多个项目及相关配置 | ycyoes's blog</title>
+  <title>Go包运行机制 | ycyoes's blog</title>
   
 
 
@@ -294,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.ycyoes.com/2017/06/19/Tomcat部署多个项目及相关配置/">
+    <link itemprop="mainEntityOfPage" href="http://www.ycyoes.com/2017/08/18/Go包运行机制/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="ycyoes">
@@ -311,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Tomcat部署多个项目及相关配置</h1>
+          <h1 class="post-title" itemprop="name headline">Go包运行机制</h1>
         
 
         <div class="post-meta">
@@ -323,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-19T00:00:00+08:00">
-                2017-06-19
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-18T00:35:46+08:00">
+                2017-08-18
               </time>
             
 
@@ -346,8 +350,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/运维/" itemprop="url" rel="index">
-                    <span itemprop="name">运维</span>
+                  <a href="/categories/Go/" itemprop="url" rel="index">
+                    <span itemprop="name">Go</span>
                   </a>
                 </span>
 
@@ -365,8 +369,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2017/06/19/Tomcat部署多个项目及相关配置/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/06/19/Tomcat部署多个项目及相关配置/" itemprop="commentsCount"></span>
+                <a href="/2017/08/18/Go包运行机制/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/08/18/Go包运行机制/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -374,7 +378,7 @@
 
           
           
-             <span id="/2017/06/19/Tomcat部署多个项目及相关配置/" class="leancloud_visitors" data-flag-title="Tomcat部署多个项目及相关配置">
+             <span id="/2017/08/18/Go包运行机制/" class="leancloud_visitors" data-flag-title="Go包运行机制">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -405,20 +409,40 @@
       
 
       
-        <h1 id="配置多个项目"><a href="#配置多个项目" class="headerlink" title="配置多个项目"></a>配置多个项目</h1><p>　　在tomcat的conf目录下，找到server.xml,在其中添加<host>节点即可进行多个项目的部署.<br><a id="more"></a></host></p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">　<span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"localhost"</span>  <span class="attr">appBase</span>=<span class="string">"webapps"</span></span></div><div class="line"><span class="tag">           <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"true"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.valves.AccessLogValve"</span> <span class="attr">directory</span>=<span class="string">"logs"</span></span></div><div class="line"><span class="tag">              <span class="attr">prefix</span>=<span class="string">"localhost_access_log."</span> <span class="attr">suffix</span>=<span class="string">".txt"</span></span></div><div class="line"><span class="tag">              <span class="attr">pattern</span>=<span class="string">"%h %l %u %t &amp;quot;%r&amp;quot; %s %b"</span> /&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">Context</span> <span class="attr">docBase</span>=<span class="string">"uim"</span> <span class="attr">path</span>=<span class="string">""</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"www.ycyoes.com"</span>  <span class="attr">appBase</span>=<span class="string">"hcode"</span></span></div><div class="line"><span class="tag">           <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"true"</span>&gt;</span></div><div class="line">       <span class="tag">&lt;<span class="name">Valve</span> <span class="attr">className</span>=<span class="string">"org.apache.catalina.valves.AccessLogValve"</span> <span class="attr">directory</span>=<span class="string">"logs"</span></span></div><div class="line"><span class="tag">              <span class="attr">prefix</span>=<span class="string">"localhost_access_log."</span> <span class="attr">suffix</span>=<span class="string">".txt"</span></span></div><div class="line"><span class="tag">              <span class="attr">pattern</span>=<span class="string">"%h %l %u %t &amp;quot;%r&amp;quot; %s %b"</span> /&gt;</span></div><div class="line"></div><div class="line">       <span class="tag">&lt;<span class="name">Context</span> <span class="attr">docBase</span>=<span class="string">"hcode"</span> <span class="attr">path</span>=<span class="string">""</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">Host</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>　　其中，<font color="green">name为localhost或者IP或者是域名</font>，appBase为项目所在目录，可为绝对路径或者相对路径。配置完成后启动Tomcat即可。</p>
-<h1 id="配置域名访问"><a href="#配置域名访问" class="headerlink" title="配置域名访问"></a>配置域名访问</h1><p>　　在server.xml中<host>节点的name属性输入域名即可，如：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Host</span> <span class="attr">name</span>=<span class="string">"www.ycyoes.com"</span>  <span class="attr">appBase</span>=<span class="string">"hcode"</span></span></div><div class="line"><span class="tag">            <span class="attr">unpackWARs</span>=<span class="string">"true"</span> <span class="attr">autoDeploy</span>=<span class="string">"true"</span>&gt;</span></div></pre></td></tr></table></figure></host></p>
-<p>　　即可在浏览器中通过<a href="http://www.ycyoes.com/appName">http://www.ycyoes.com/appName</a> 进行访问。</p>
-<h1 id="项目名缺省"><a href="#项目名缺省" class="headerlink" title="项目名缺省"></a>项目名缺省</h1><p>　　一般的，进行项目访问时需要在url最后输入系统名称，如<a href="http://www.ycyoes.com/appName，">http://www.ycyoes.com/appName，</a> 可通过tomcat配置，缺省系统名称也可访问。<br>　　在<host>节点内添加如下内容：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Context</span> <span class="attr">docBase</span>=<span class="string">"hcode"</span> <span class="attr">path</span>=<span class="string">""</span> /&gt;</span></div></pre></td></tr></table></figure></host></p>
-<p>　　其中，docBase即为系统名称，此时通过<a href="http://www.ycyoes.com">http://www.ycyoes.com</a> 即可进行系统的访问。</p>
-<h1 id="系统访问时端口号缺省"><a href="#系统访问时端口号缺省" class="headerlink" title="系统访问时端口号缺省"></a>系统访问时端口号缺省</h1><p>　　在访问系统时一般需要在ip地址后带上端口号，如<a href="http://ip:port/appName" target="_blank" rel="external">http://ip:port/appName</a> ,但是80端口可缺省，配置tomcat端口为80则不需要在url中输入端口。配置如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"80"</span> <span class="attr">protocol</span>=<span class="string">"HTTP/1.1"</span></span></div><div class="line"><span class="tag">               <span class="attr">connectionTimeout</span>=<span class="string">"20000"</span></span></div><div class="line"><span class="tag">               <span class="attr">redirectPort</span>=<span class="string">"443"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
-<p>　　此时可通过<a href="http://ip/appName" target="_blank" rel="external">http://ip/appName</a> 进行访问。</p>
-<h1 id="https访问配置"><a href="#https访问配置" class="headerlink" title="https访问配置"></a>https访问配置</h1><p>　　打开server.xml进行如下配置：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"443"</span> <span class="attr">protocol</span>=<span class="string">"org.apache.coyote.http11.Http11Protocol"</span></span></div><div class="line"><span class="tag">               <span class="attr">maxThreads</span>=<span class="string">"150"</span> <span class="attr">SSLEnabled</span>=<span class="string">"true"</span> <span class="attr">scheme</span>=<span class="string">"https"</span> <span class="attr">secure</span>=<span class="string">"true"</span> <span class="attr">clientAuth</span>=<span class="string">"false"</span></span></div><div class="line"><span class="tag">                <span class="attr">sslProtocol</span>=<span class="string">"TLS"</span>               <span class="attr">keystoreFile</span>=<span class="string">"/home/doc/keys/213972284410468.pfx"</span></span></div><div class="line"><span class="tag">                <span class="attr">keystoreType</span>=<span class="string">"PKCS12"</span></span></div><div class="line"><span class="tag">                <span class="attr">keystorePass</span>=<span class="string">"213972284410468"</span>         /&gt;</span></div></pre></td></tr></table></figure></p>
-<p>　　添加keystoreFile，keystoreType，keystorePass即可进行https访问。</p>
-<h1 id="自动跳转到https连接"><a href="#自动跳转到https连接" class="headerlink" title="自动跳转到https连接"></a>自动跳转到https连接</h1><p>　　如果希望输入http链接时自动跳转到https，需要在web.xml中添加如下内容：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">login-config</span>&gt;</span></div><div class="line">      <span class="comment">&lt;!-- Authorization setting for SSL --&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">auth-method</span>&gt;</span>CLIENT-CERT<span class="tag">&lt;/<span class="name">auth-method</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">realm-name</span>&gt;</span>Client Cert Users-only Area<span class="tag">&lt;/<span class="name">realm-name</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">login-config</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">security-constraint</span>&gt;</span></div><div class="line">                <span class="comment">&lt;!-- Authorization setting for SSL --&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">web-resource-collection</span> &gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">web-resource-name</span> &gt;</span>SSL<span class="tag">&lt;/<span class="name">web-resource-name</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">web-resource-collection</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">user-data-constraint</span>&gt;</span></div><div class="line">                        <span class="tag">&lt;<span class="name">transport-guarantee</span>&gt;</span>CONFIDENTIAL<span class="tag">&lt;/<span class="name">transport-guarantee</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">user-data-constraint</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">security-constraint</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>　　以上内容位置在内，添加后输入http访问时会自动跳转到https连接。</p>
-<h1 id="https访问端口号缺省"><a href="#https访问端口号缺省" class="headerlink" title="https访问端口号缺省"></a>https访问端口号缺省</h1><p>　　Tomcat中https默认端口为8443，该为443后可进行端口号缺省访问系统。如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Connector</span> <span class="attr">port</span>=<span class="string">"443"</span> <span class="attr">protocol</span>=<span class="string">"org.apache.coyote.http11.Http11Protocol"</span></span></div><div class="line"><span class="tag">               <span class="attr">maxThreads</span>=<span class="string">"150"</span> <span class="attr">SSLEnabled</span>=<span class="string">"true"</span> <span class="attr">scheme</span>=<span class="string">"https"</span> <span class="attr">secure</span>=<span class="string">"true"</span> <span class="attr">clientAuth</span>=<span class="string">"false"</span> <span class="attr">sslProtocol</span>=<span class="string">"TLS"</span></span></div><div class="line"><span class="tag">                <span class="attr">keystoreFile</span>=<span class="string">"/home/doc/keys/213972284410468.pfx"</span></span></div><div class="line"><span class="tag">                <span class="attr">keystoreType</span>=<span class="string">"PKCS12"</span></span></div><div class="line"><span class="tag">                <span class="attr">keystorePass</span>=<span class="string">"213972284410468"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+        <p>&emsp;原文地址： <a href="https://www.goinggo.net/2013/07/how-packages-work-in-go-language.html" target="_blank" rel="external">https://www.goinggo.net/2013/07/how-packages-work-in-go-language.html</a><br>&emsp;自从开始用Go编程，如何最好的组织我的代码和使用package这个关键词对我来说很神秘。package关键字类似于C#中使用的namespace，通常将包名和目录结构绑定。<br>Go有如下web页面尝试解释如何编写Go代码：<a href="http://golang.org/doc/code.html" target="_blank" rel="external">http://golang.org/doc/code.html</a><br><a id="more"></a><br>&emsp;当我开始用Go进行编程时，这是我阅读的第一份文档。它被放在我的手头，主要因为我一直使用Visual Studio开发，代码以solution和工程文件的形式为你打包。<br>&emsp;”如何写Go代码”始于工作空间的概念。想一下你项目的根目录。如果你使用Visual Studio进行开发，这就是你的solution和工程文件被放置的地方。然后在你的工作空间你需要创建一个单一的叫做src的子目录。如果你想使用Go tools正确的运行代码这是必须的。在src目录开始，你可以以你想要的方式自由的组织你的代码。你需要理解Go团队展示的关于包和源码组织的方式，否则你可能基于该原则重构你的代码。  </p>
+<ul>
+<li>在我的电脑上创建了一个叫做Test的工作空间，并且需要一个src子目录。这是创建你的工程的第一步。</li>
+<li>接着使用LiteIDE打开Test目录，创建子目录和空的Go源码文件。  </li>
+</ul>
+<p>&emsp;首先我们为即将创建的应用创建了一个子目录。main函数所在目录名为可执行文件的名字。在我们的例子中main.go包含main函数并且被置于myprogram目录。这意味着我们的可执行文件将被命名为myprogram.<br>&emsp;src中的其他子目录将包含我们工程的包。按照惯例，置于那些目录中的源文件应以目录名作为包名。在我们的例子中，新包被命名为samplepkg和subpkg。源码文件可命名为任何你喜欢的名字。<br>创建相同的包文件夹，随后创建空的GO源码文件。<br><img src="http://ou37fuqh7.bkt.clouddn.com/go_package.png" alt="image"></p>
+<p><strong>如果你不把工作空间文件夹添加到GOPATH路径将会出现问题。</strong>  </p>
+<p>意识到自定义目录窗口是个文本框花了我一点时间。因此你可以直接编辑哪些文件夹。系统GOPATH是只读的。<br><img src="http://ou37fuqh7.bkt.clouddn.com/GOPATH.png" alt="image"></p>
+<p>&emsp;Go设计者已经做了很多事情当命名他们的包和源码文件的时候。所有的文件和目录名均为小写，并且不使用下划线分割目录名中的单词。并且，包名和目录名相匹配。目录中的代码文件属于以目录命名的包。</p>
+<p>看下Go源码目录下的标准库包。<br><img src="http://ou37fuqh7.bkt.clouddn.com/go_builtin.png" alt="image"></p>
+<p>&emsp;bufio和builtin包目录时目录命名规范的最好示例。它们也可称作buf_io和built_in。</p>
+<p>&emsp;再看下Go源码目录，核验下源码文件的名字。</p>
+<blockquote>
+<p>注意一些文件名中下划线的使用。当文件为测试代码或者被指定为特殊平台时，下划线将被使用。<br><strong>通常的规范是将其中一个源码文件命名为与包名相同</strong>。bufio遵从此规范。然而，这是不太被严格遵从的规范。  </p>
+</blockquote>
+<p>&emsp;在fmt包你将发现没有源码文件命名为fmt.go。我个人比较喜欢将我的包和源码文件不同命名。<br>最后，打开doc.go,format.go,print.go和scan.go文件。它们都在fmt包下声明。  </p>
+<p>让我们看下sample.go中的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">package samplepkg</div><div class="line"></div><div class="line">import (</div><div class="line">    &quot;fmt&quot;</div><div class="line">)</div><div class="line"></div><div class="line">type Sample struct &#123;</div><div class="line">    Name string</div><div class="line">&#125;</div><div class="line"></div><div class="line">func New(name string) (sample * Sample) &#123;</div><div class="line">    return &amp;Sample&#123;</div><div class="line">        Name: name,</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">func (sample * Sample) Print() &#123;</div><div class="line">    fmt.Println(&quot;Sample Name:&quot;, sample.Name)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>代码没有什么实际意义，仅使我们关注于两个重要的规范。</p>
+<ol>
+<li>注意包名和子目录名相同。</li>
+<li>有一个叫做New的函数。</li>
+</ol>
+<p>&emsp;New函数是一个Go包规范，用于创建一个核心类型或者为其他应用开发者使用而创建的不同类型。看下New是如何定义并在log.go,bufio.go和cypto.go中被实现的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">log.go</div><div class="line">// New creates a new Logger. The out variable sets the</div><div class="line">// destination to which log data will be written.</div><div class="line">// The prefix appears at the beginning of each generated log line.</div><div class="line">// The flag argument defines the logging properties.</div><div class="line">func New(out io.Writer, prefix string, flag int) * Logger &#123;</div><div class="line">    return &amp;Logger&#123;out: out, prefix: prefix, flag: flag&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">bufio.go</div><div class="line">// NewReader returns a new Reader whose buffer has the default size.</div><div class="line">func NewReader(rd io.Reader) * Reader &#123;</div><div class="line">    return NewReaderSize(rd, defaultBufSize)</div><div class="line">&#125;</div><div class="line"></div><div class="line">crypto.go</div><div class="line">// New returns a new hash.Hash calculating the given hash function. New panics</div><div class="line">// if the hash function is not linked into the binary.</div><div class="line">func (h Hash) New() hash.Hash &#123;</div><div class="line">    if h &gt; 0 &amp;&amp; h &lt; maxHash &#123;</div><div class="line">        f := hashes[h]</div><div class="line">        if f != nil &#123;</div><div class="line">            return f()</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    panic(&quot;crypto: requested hash function is unavailable&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&emsp;自从各个包充当命名空间，每个包都可以有自己版本的New.在bufio.go中多个类型能够被创建，因此没有独立的New函数。这里你将会发现像NewReader和NewWriter这样的函数。</p>
+<p>&emsp;回看下sample.go.在我们的代码中核心类型是Sample，因此我们的New函数返回了一个Sample类型的引用。然后我们添加一个成员函数来输出New中提供的名称。</p>
+<p>现在让我们看下sub.go的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">package subpkg</div><div class="line"></div><div class="line">import (</div><div class="line">    &quot;fmt&quot;</div><div class="line">)</div><div class="line"></div><div class="line">type Sub struct &#123;</div><div class="line">    Name string</div><div class="line">&#125;</div><div class="line"></div><div class="line">func New(name string) (sub * Sub) &#123;</div><div class="line">    return &amp;Sub&#123;</div><div class="line">        Name: name,</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">func (sub * Sub) Print() &#123;</div><div class="line">    fmt.Println(&quot;Sub Name:&quot;, sub.Name)</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&emsp;除了我们命名类型为Sub代码是一样的。包名和子目录名相匹配，并且New返回了一个Sub类型的引用。<br>既然我们的包被正确定义并且编码正确，我们可以运行它们。  </p>
+<p>看下main.go的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import (</div><div class="line">    &quot;samplepkg&quot;</div><div class="line">    &quot;samplepkg/subpkg&quot;</div><div class="line">)</div><div class="line"></div><div class="line">func main() &#123;</div><div class="line">    sample := samplepkg.New(&quot;Test Sample Package&quot;)</div><div class="line">    sample.Print()</div><div class="line"></div><div class="line">    sub := subpkg.New(&quot;Test Sub Package&quot;)</div><div class="line">    sub.Print()</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>&emsp;我们的GOPATH指向工作空间目录，在我的实例中为/Users/bill/Spaces/Test,我们的导入引用从这点开始。这里我们基于目录结构对包进行引用。<br>&emsp;接下来我们在每个需要的包中调用New函数并且创建那些核心类型的变量。<br>&emsp;现在构建并且运行程序。你应该可以看见一个叫做myprogram的可执行程序被创建。<br>&emsp;一旦你的程序准备好发布你就可以执行安装命令了。  </p>
+<blockquote>
+<p>安装命令会在你的工作空间创建bin和pkg文件夹。<strong>注意最后的可执行文件被放在bin目录下。</strong><br>被编译的包被放置在pkg目录下。该目录中会创建一个描述目标结构并且映射源码目录的子目录。<br>这些被编译的包的存在能够避免go tool不必要的源码重新编译。<br>&emsp;最后一个问题，在“如何运行Go代码”发布时发现，在之后构建你的代码时，.a文件被Go tool忽略。没有源码文件你将不能构建你的程序。我还没有在任何文档中发现关于这些.a文件在你构建Go程序时是如何被直接使用的真正解释。如果有人能分享一些关于这个主题的信息我将非常感激。<br>最后，最好遵从Go设计者的规范开发。看下他们写的源码，提供了如何进行开发的最好的文档。我们中的很多人为公司写代码。如果我们都遵从相同的规范，我们能够保证兼容性和可读性。当有疑问的时候打开/usr/local/go/src/pkg文件夹然后寻找解决办法。  </p>
+</blockquote>
+<p>&emsp;一如往常，我希望这能对你理解Go编程语言有一点点帮助。</p>
+<p>———————个人翻译，不喜勿喷——————–！！</p>
 
       
     </div>
@@ -473,13 +497,19 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Tomcat/" rel="tag"># Tomcat</a>
+            <a href="/tags/Go/" rel="tag"># Go</a>
           
-            <a href="/tags/配置/" rel="tag"># 配置</a>
+            <a href="/tags/构建/" rel="tag"># 构建</a>
           
-            <a href="/tags/运维/" rel="tag"># 运维</a>
+            <a href="/tags/运行/" rel="tag"># 运行</a>
           
-            <a href="/tags/多个项目/" rel="tag"># 多个项目</a>
+            <a href="/tags/命名空间/" rel="tag"># 命名空间</a>
+          
+            <a href="/tags/编译/" rel="tag"># 编译</a>
+          
+            <a href="/tags/兼容性/" rel="tag"># 兼容性</a>
+          
+            <a href="/tags/可读性/" rel="tag"># 可读性</a>
           
         </div>
       
@@ -492,8 +522,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/06/17/Go匿名函数/" rel="next" title="Go匿名函数">
-                <i class="fa fa-chevron-left"></i> Go匿名函数
+              <a href="/2017/08/13/Maven环境配置及简单使用（二）/" rel="next" title="Maven环境配置及简单使用（二）">
+                <i class="fa fa-chevron-left"></i> Maven环境配置及简单使用（二）
               </a>
             
           </div>
@@ -501,10 +531,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/05/并发程序开发及优化之不变模式/" rel="prev" title="并发程序开发及优化之不变模式">
-                并发程序开发及优化之不变模式 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -558,17 +584,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview sidebar-panel">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/portrait.jpg"
@@ -668,22 +685,6 @@
 
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#配置多个项目"><span class="nav-number">1.</span> <span class="nav-text">配置多个项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置域名访问"><span class="nav-number">2.</span> <span class="nav-text">配置域名访问</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目名缺省"><span class="nav-number">3.</span> <span class="nav-text">项目名缺省</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#系统访问时端口号缺省"><span class="nav-number">4.</span> <span class="nav-text">系统访问时端口号缺省</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#https访问配置"><span class="nav-number">5.</span> <span class="nav-text">https访问配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自动跳转到https连接"><span class="nav-number">6.</span> <span class="nav-text">自动跳转到https连接</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#https访问端口号缺省"><span class="nav-number">7.</span> <span class="nav-text">https访问端口号缺省</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
