@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="区块链，分布式计算，网络编程，加密签名，数据存储，信任机制，共识机制，加密货币，去中心化，点对点," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="何为区块链维基百科定义:区块链（英语：blockchain 或 block chain）是用分布式数据库识别、传播和记载信息的智能化对等网络, 也称为价值互联网。中本聪在2008年，于《比特币白皮书》中提出“区块链”概念，并在2009年创立了比特币社会网络，开发出第一个区块，即“创世区块”。   百度定义：    区块链是分布式数据存储、点对点传输、共识机制、加密算法等计算机技术的新型应用模式。所">
+<meta name="keywords" content="区块链，分布式计算，网络编程，加密签名，数据存储，信任机制，共识机制，加密货币，去中心化，点对点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="区块链初识">
+<meta property="og:url" content="http://www.ycyoes.com/2017/09/07/区块链初识/index.html">
+<meta property="og:site_name" content="ycyoes&#39;s blog">
+<meta property="og:description" content="何为区块链维基百科定义:区块链（英语：blockchain 或 block chain）是用分布式数据库识别、传播和记载信息的智能化对等网络, 也称为价值互联网。中本聪在2008年，于《比特币白皮书》中提出“区块链”概念，并在2009年创立了比特币社会网络，开发出第一个区块，即“创世区块”。   百度定义：    区块链是分布式数据存储、点对点传输、共识机制、加密算法等计算机技术的新型应用模式。所">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-09-08T14:34:09.926Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="区块链初识">
+<meta name="twitter:description" content="何为区块链维基百科定义:区块链（英语：blockchain 或 block chain）是用分布式数据库识别、传播和记载信息的智能化对等网络, 也称为价值互联网。中本聪在2008年，于《比特币白皮书》中提出“区块链”概念，并在2009年创立了比特币社会网络，开发出第一个区块，即“创世区块”。   百度定义：    区块链是分布式数据存储、点对点传输、共识机制、加密算法等计算机技术的新型应用模式。所">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ycyoes.com/2017/09/07/区块链初识/"/>
+
+
+
+
+
+  <title>区块链初识 | ycyoes's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://github.com/ycyoes"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ycyoes's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">open, sharing...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ycyoes.com/2017/09/07/区块链初识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ycyoes">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/portrait.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ycyoes's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">区块链初识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-07T00:00:00+08:00">
+                2017-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blockchain/" itemprop="url" rel="index">
+                    <span itemprop="name">blockchain</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/09/07/区块链初识/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/09/07/区块链初识/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2017/09/07/区块链初识/" class="leancloud_visitors" data-flag-title="区块链初识">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="何为区块链"><a href="#何为区块链" class="headerlink" title="何为区块链"></a>何为区块链</h1><p>维基百科定义:<br>区块链（英语：blockchain 或 block chain）是用分布式数据库识别、传播和记载信息的智能化对等网络, 也称为价值互联网。中本聪在2008年，于《比特币白皮书》中提出“区块链”概念，并在2009年创立了比特币社会网络，开发出第一个区块，即“创世区块”。  </p>
+<p>百度定义：   </p>
+<p>区块链是分布式数据存储、点对点传输、共识机制、加密算法等计算机技术的新型应用模式。所谓共识机制是区块链系统中实现不同节点之间建立信任、获取权益的数学算法 。</p>
+<blockquote>
+<p>区块链是由多独立节点参与的分布式数据库系统，也可以理解为分布式账簿(distributed ledger technology,简称DLT)，由这些节点共同维护。它的特点是不易篡改、很难伪造、可追溯。区块链记录所有发生交易的信息，过程高效透明，数据高度安全。凡是需要公正、公平、诚实的应用领域，都可以应用区块链技术。</p>
+</blockquote>
+<a id="more"></a>
+<h1 id="什么是加密货币"><a href="#什么是加密货币" class="headerlink" title="什么是加密货币"></a>什么是加密货币</h1><p><strong>加密货币首先是一种数字货币。</strong> 早在比特币出现之前，“数字货币”、“虚拟货币”、“电子货币”等就已经出现了，特别以“虚拟货币”居多，最简单的理解就是“货币数字化或虚拟化”。这里的货币是现实的法币，比如美元、人民币，数字化就是不用拿钞票，直接通过网银、支付宝等就可以支付。</p>
+<p>后来，在游戏平台，最早提出了游戏币的概念，通过法币直接兑换，然后，玩家使用它购买各种装备。接着，很多网站也推出了各种币，通过游戏的思维，用以吸引用户。这些所谓的数字货币，最直观的解释，其实就是“代币”。</p>
+<blockquote>
+<p>加密货币(Cryptocurrency)，是一种基于点对点网络（P2P网络)、没有发行机构、总量基本固定的加密电子通货。</p>
+</blockquote>
+<p>解读：</p>
+<p>（1）P2P网络：这个不是什么新鲜玩意，最早我们使用的Bit下载，就是基于P2P网络的，现在很多下载工具都支持。它的好处就是“去中心化”，也就是没有中央服务器，要下载的文件都在用户自己电脑上，而且下载速度更快;</p>
+<p>（2）没有发行机构：就是说，不是哪个公司、银行或国家控制发行的。要做到这一点，同时防止通货膨胀等因素，需要在编程中使用非常复杂的机制和规则来实现。</p>
+<p>（3）总量基本固定：这是保证加密货币价值的一种策略，“物以稀为贵”，任何东西没有上限就会失去它的吸引力。这一点，区别于很多网络社区使用的积分，比如：A币、C币、Q币、S币等。</p>
+<p>（4）加密：这里说的加密，不是用户使用的输入用户名、密码那种简单的权限控制，而是对每一个产生的电子货币本身的交易与传输的加密。密码学本身很复杂，但是使用它并不复杂，明白这个就足够了。</p>
+<p>（5）电子通货：也就是说加密货币就是货币，跟法币一样，可以自由交易，只不过是一种电子（数字）形式而已。那么什么A币、Q币之类的不是货币吗？不是，下面详细解释这一点。</p>
+<h1 id="加密货币与法币共同点"><a href="#加密货币与法币共同点" class="headerlink" title="加密货币与法币共同点"></a>加密货币与法币共同点</h1><p>（1）<strong>定量</strong>：法币通常与背后的黄金或者所谓的GDP挂钩，算是相对固定（经济低迷时的过量发行暂且别考虑了）。加密货币，可以算作绝对的固定数量，或者少量的增发（可以弥补一些丢失的币等），防止通货膨胀。</p>
+<p>但是，一些网站提供的数字币，是没有固定数量的，一般作为法币的代币，用户购买了多少，总量就有多少。</p>
+<p>（2）<strong>加密</strong>：法币是有防伪的，应该说实物防伪的最高级别的技术就是在法币上（不过，仍然可以伪造，假币并不少见），通过验钞机等专门的验钞设备可以验证。加密货币的加密技术就相当于防伪技术，每一笔交易都会被严格加密，专家解释说，破解加密货币是理论上可行、成本上绝对不可行的事情，因此很难伪造，同时，验证机制要远胜法币，简单、快速且准确。</p>
+<p>那么，个别网站的数字币，就不是这样，仅仅是一串数字而已，管理员可以修改、冻结，他们的加密也仅仅是用户登录时的权限控制。</p>
+<p>（3）<strong>交易</strong>：法币，也称为通货，被称为一般等价物，是可以与任何商家交换，购买任何东西的，这是货币的最基本属性。加密货币，也是如此，你可以支付给任何一方，加密货币会安全到达，不用担心被黑客劫持、破解，也不用担心价值会减少或蒸发。</p>
+<p>但是，一些网站的数字币，是绝对没有这种功能的，只能在网站内部交易，离开网站就没有了任何价值。有些商城可以使用积分购物，看似可以在很多网站之间交易，其实仍然是他们自己的网站。当然，网站如果与第三方签订了协议，规定它的数字币值多少法币，也就可以与其他网站交易，但是这种交易，本质仍然是法币交易。不过，即便如此，这个协议，估计没有人愿意签订，因为无法监督、控制，无法保证绝对信任。</p>
+<h1 id="加密货币靠谱吗"><a href="#加密货币靠谱吗" class="headerlink" title="加密货币靠谱吗"></a>加密货币靠谱吗</h1><p>结论当然是靠谱，但是解释为什么，就要动用很多技术和理论。还好，这些技术和理论，都是目前成熟的技术。你只要认为他们靠谱，那么下面的解释，就很好理解。</p>
+<p><strong>(1) 去中心化</strong></p>
+<p>首先明白什么是“中心化”。目前，我们通过浏览器浏览的各大网站，都是中心化的，必须有一台或多台服务器，把我们浏览的内容整理好，供我们浏览。服务器坏了的话，我们也就无法访问了。中心化的东西，一切都被某个组织或公司控制着。</p>
+<p>去中心化，是基于P2P网络的，没有一台机器作为中心化的服务器的功能，网络中的每一台电脑都是平等的，任何一台掉线、宕机，都不会影响整个网络继续运行。如果大家都信任这个网络，这个网络基本上永远都不会死掉，现在的比特币网络基本上如此。</p>
+<p><strong>这是加密货币的交易通道。</strong> 是网络基础，可以实现无障碍交易。只要可以上网，任何时间、任何地点，就可以介入这个交易网络，把加密货币支付到世界的任何一个角落。</p>
+<p><strong>(2)加密解密</strong></p>
+<blockquote>
+<p>从理论上讲，加密货币的交易地址、每一笔交易等都是加密解密中的一部分，破解一个毫无意义，全部破解相当不易，加之P2P网络节点众多，破解一个节点也没有任何价值，所以加密货币的安全级别应该是目前最高的。</p>
+</blockquote>
+<p><strong>这是加密货币的安全保障。</strong> 有了这一点，我们才能放心的把加密货币支付出去，而不担心丢失、被盗，买家才能有支付交易的基础动力。</p>
+<p><strong>(3) 区块链</strong></p>
+<blockquote>
+<p>区块链的本质就是存储在数据库里的交易数据，其结构不过是每一条记录都会记录前一条区块头的哈希值，从而可以实现往前追溯，直到第一个创世区块。</p>
+</blockquote>
+<p>更重要的是，这个数据库，在P2P网络中分布式存储，每一个节点都会保存一份拷贝，每一个人都可以公开访问，查看交易记录。也就是说，交易双方不仅能看到交易结果，整个网络节点都能看到，公开、透明、可追溯，让你不得不信。</p>
+<p><strong>这是加密货币的信用保障。</strong> 任何经济行为，没有信任作为基础，都不可能达成。加密货币这个独创性，为构建公开、透明、可追溯的信用体系打开了一扇大门，各大公司、组织、个人为加密货币痴迷，都是因为这个创新技术背后的无限可能性。</p>
+<p><strong>(4) 共识机制</strong></p>
+<p>也是算法机制，包括工作量证明机制（POW）、股权证明机制（POS）、授权股权证明机制（DPOS）等，类似于大家商讨问题，集体决策时的原则和规矩。<strong>这才是加密货币需要重点编码的地方，也是加密货币开发的难点。</strong></p>
+<p><strong>这是加密货币的运行规则。</strong> 是把前面的通用技术进行融合创新的地方，不了解这个部分，就无从谈起加密货币开发。</p>
+<p>最后，上述技术并非相互独立的，而是相互支撑，通过共识机制成为一个整体，实现了加密货币绝对不用某个机构发行、也能保证绝对安全的支付和交易。</p>
+<h1 id="未来趋势"><a href="#未来趋势" class="headerlink" title="未来趋势"></a>未来趋势</h1><p>比特币之前，人类从来无法完全控制“利益”走向，比特币之后，人们终于可以对“利益”转移进行编程处理，这将给人类未来带来无限的可能。</p>
+<p>去中心化，人类社会的基本形态，是个体交换的基本前提。之所以被提出来，不是这个技术怎么样先进，而是现有的技术多么的落后。p2p、加密解密和分布式等技术的出现，都是人类在某个阶段解决特定问题设计出来的，组合在一起成为加密货币，更接近了人类本源。</p>
+<h1 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h1><p>我们的目标是利用区块链技术，开发应用产品，所以了解它的应用场景将对我们有很大帮助。汇总一下，这项技术可以应用在这样几个方面：</p>
+<p><strong>（1）转账支付</strong></p>
+<p>这个应该是最基本的功能，很多加密货币，比如比特币，本身的目标就是实现没有第三方的直接支付，所以应用于转账、支付、借贷，都是简单和轻松的事情。特别是，加密货币之间可以直接互相兑换之后，未来或许将再也见不到有独立第三方存在的支付机构了。</p>
+<p><strong>（2）资金结算</strong></p>
+<p>区块链本身的结构体系，就是一个很好的结算系统，由于网络遍布世界各地，跨境支付与结算也是非常容易的事情。当前的银行结算体系非常复杂，每个机构都有自己的记账，结算难度大，周期长。于是有人，联合众多机构，采取联盟链的方式，引入区块链技术，从而大大降低结算成本和周期。有人预计，在全球范围，区块链应用于B2B跨境支付与结算可以使每笔交易的成本从约26美元下降到约15美元。</p>
+<p><strong>（3）智能合约</strong></p>
+<p>智能合约将是未来重要的发展方向。所谓的智能合约，就是“合约智能化”，主要特点是：合同条款不可篡改，有效性得到保障；合同制定和执行的全过程透明公开，便于监督；合同执行过程可编程，能够自动执行，不受干预。所以，这将改变未来的契约方式，促进社会更加公开公平公正。</p>
+<p><strong>（4）身份认证</strong></p>
+<p>用户身份认证与识别是银行规避反洗钱等违法行为的必要手段，各国商业银行不断投入资源加强信用审核及客户征信，耗费了大量人力物力。如果采用区块链技术，可以促进金融领域形成标准化的对用户身份数据格式的要求，从而在保证数据安全的同时实现信息共享，减少重复审核过程。据估算，在全球范围，将区块链应用于反洗钱和身份认证工作，可以为行业一年节约30亿-50亿美元的成本。</p>
+<p><strong>（5）电子商务</strong></p>
+<p>大型的电子商务网站，涉及到仓储、物流、交易和支付，每一个环节都需要大量的协作和资金结算。特别是在支付环节，目前都是基于有第三方存在的中心化的支付系统，存在着与银行资金结算慢，容易遭受各类黑客攻击等问题。使用区块链技术，通过多重签名，就可以简单的抛开第三方，实现用户与商家的直接支付，大大降低了电子商务网站的运营成本和操作风险，同时也提高了用户支付的安全性。</p>
+<p><strong>（6）版权保护</strong></p>
+<p>数字出版盗版猖獗，网络小说、网络游戏、音乐、视频、图片等资源在没有授权的情况下，被大量免费传播，与之相关的创作者和运营机构直接蒙受巨大损失，打击了优秀作者的创作激情，提高了运营机构的操作成本，阻碍了人类知识的创新发展。许多音乐艺术家、摄影艺术家、网络文学作家求助于区块链，通过区块链技术确权数字出版物，更加直接地接受读者和用户的付费，并使用智能合约，自动解决许可问题，从而在艺术家和用户之间建立更直接的互动关系。亿书便是专注在数字出版行业，全力打造上下游生态圈，给人类创作增添新动力。</p>
+<p><strong>（7）证券交易</strong></p>
+<p>股票等证券交易结算时间较长，如果引入区块链技术，股票交易日和交割日的时间间隔可以从1-3天缩减为10分钟，交易的效率和可控性提高，交易行为的风险降低。同时，交易方身份、交易量等信息被实时记录在区块链上，有利于证券发行者提高决策效率，也有利于监管维护，减少暗箱操作。据专家预计，在全球范围，将区块链应用于现金证券的清算和结算，行业一年可以节约100多亿美元成本，而在外汇、大宗商品和场外衍生品领域，也会去除大量额外成本。</p>
+<p><strong>（8）贸易金融</strong></p>
+<p>传统的供应链金融或贸易金融业务流程高度依赖人工，包括大量审阅、验证交易单据及纸质文件的环节，不但人力成本高，各个环节出现失误的风险也很大，如果在分布式账本上管理这些流程，就可以降低人力等成本，提高效率和透明度，降低欺诈风险和人工工作失误风险。专业机构预计，在全球范围，将区块链应用于供应链或贸易金融，一年可以为金融机构和买卖方企业带来170-200亿美元的价值。</p>
+<p><strong>（9）物联网和大数据</strong></p>
+<p>物联网和大数据主要特点都是分布式存在，所以同样非常适合使用区块链技术。通过区块链技术，物联网、大数据、云存储等这类分布式系统，各个节点高度自治，彼此之间又智能协同，由于没有中央控制系统来识别对方，节点将能够独立自主地与对方进行联系，管理软件更新、软件错误或控制能源消耗，协同能力得到强化。同时安全性得到加强，不大容易引起系统性破坏和数据大范围丢失。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a href="http://bitcoin-on-nodejs.ebookchain.org" target="_blank" rel="external">http://bitcoin-on-nodejs.ebookchain.org</a></li>
+<li>基于区块链的应用系统开发方法研究(软件学报)</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="ycyoes wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的二维码，订阅我的微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏支持</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay-reward.jpg" alt="ycyoes WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay-reward.jpg" alt="ycyoes Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/区块链，分布式计算，网络编程，加密签名，数据存储，信任机制，共识机制，加密货币，去中心化，点对点/" rel="tag"># 区块链，分布式计算，网络编程，加密签名，数据存储，信任机制，共识机制，加密货币，去中心化，点对点</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/05/变态心理学（二）/" rel="next" title="变态心理学（二）">
+                <i class="fa fa-chevron-left"></i> 变态心理学（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/08/变态心理学（三）/" rel="prev" title="变态心理学（三）">
+                变态心理学（三） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/portrait.jpg"
+               alt="ycyoes" />
+          <p class="site-author-name" itemprop="name">ycyoes</p>
+           
+              <p class="site-description motion-element" itemprop="description">personal blog sharing ...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ycyoes" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/ycyoes" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/u/6fe5805f9bb2" title="简书" target="_blank">简书</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#何为区块链"><span class="nav-number">1.</span> <span class="nav-text">何为区块链</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是加密货币"><span class="nav-number">2.</span> <span class="nav-text">什么是加密货币</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#加密货币与法币共同点"><span class="nav-number">3.</span> <span class="nav-text">加密货币与法币共同点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#加密货币靠谱吗"><span class="nav-number">4.</span> <span class="nav-text">加密货币靠谱吗</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#未来趋势"><span class="nav-number">5.</span> <span class="nav-text">未来趋势</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#应用场景"><span class="nav-number">6.</span> <span class="nav-text">应用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">6.1.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ycyoes</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyt95geaN';
+      var conf = '1d1c070b6d1ae9a4be89dd9cbd09e121';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("VhXqTkplVtG2QPDH10tt1lQn-gzGzoHsz", "2JvEz0C6VkkXPI481iVafkN3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
