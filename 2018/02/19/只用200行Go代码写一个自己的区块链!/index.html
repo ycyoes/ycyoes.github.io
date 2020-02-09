@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="区块链，智能合约，网络编程，共识机制，点对点," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="区块链是目前最热门的话题，广大读者可能都听说过比特币，或许还有智能合约，相信大家都非常想了解这一切是如何工作的。这篇文章就是帮助你使用Go语言来实现一个简单的区块链，用不到 200 行代码来揭示区块链的原理！  采用人类平静时的心跳数据（BPM心率）作为这篇文章中的示例数据。让我们先来统计一下你一分钟内的心跳数，然后记下来，这个数字可能会在接下来的内容中用到。 通过本文，你将可以做到：  创建自">
+<meta name="keywords" content="区块链，智能合约，网络编程，共识机制，点对点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="只用200行Go代码写一个自己的区块链!">
+<meta property="og:url" content="http://www.ycyoes.com/2018/02/19/只用200行Go代码写一个自己的区块链!/index.html">
+<meta property="og:site_name" content="ycyoes&#39;s blog">
+<meta property="og:description" content="区块链是目前最热门的话题，广大读者可能都听说过比特币，或许还有智能合约，相信大家都非常想了解这一切是如何工作的。这篇文章就是帮助你使用Go语言来实现一个简单的区块链，用不到 200 行代码来揭示区块链的原理！  采用人类平静时的心跳数据（BPM心率）作为这篇文章中的示例数据。让我们先来统计一下你一分钟内的心跳数，然后记下来，这个数字可能会在接下来的内容中用到。 通过本文，你将可以做到：  创建自">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ou37fuqh7.bkt.clouddn.com/blockchain-100code.png">
+<meta property="og:image" content="http://ou37fuqh7.bkt.clouddn.com/blockchain-100code1.png">
+<meta property="og:image" content="http://ou37fuqh7.bkt.clouddn.com/blockchain-100code2.png">
+<meta property="og:updated_time" content="2020-02-09T06:15:48.056Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="只用200行Go代码写一个自己的区块链!">
+<meta name="twitter:description" content="区块链是目前最热门的话题，广大读者可能都听说过比特币，或许还有智能合约，相信大家都非常想了解这一切是如何工作的。这篇文章就是帮助你使用Go语言来实现一个简单的区块链，用不到 200 行代码来揭示区块链的原理！  采用人类平静时的心跳数据（BPM心率）作为这篇文章中的示例数据。让我们先来统计一下你一分钟内的心跳数，然后记下来，这个数字可能会在接下来的内容中用到。 通过本文，你将可以做到：  创建自">
+<meta name="twitter:image" content="http://ou37fuqh7.bkt.clouddn.com/blockchain-100code.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ycyoes.com/2018/02/19/只用200行Go代码写一个自己的区块链!/"/>
+
+
+
+
+
+  <title>只用200行Go代码写一个自己的区块链! | ycyoes's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://github.com/ycyoes"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ycyoes's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">open, sharing...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ycyoes.com/2018/02/19/只用200行Go代码写一个自己的区块链!/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ycyoes">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/portrait.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ycyoes's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">只用200行Go代码写一个自己的区块链!</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-19T00:00:00+08:00">
+                2018-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/blockchain/" itemprop="url" rel="index">
+                    <span itemprop="name">blockchain</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/02/19/只用200行Go代码写一个自己的区块链!/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/02/19/只用200行Go代码写一个自己的区块链!/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2018/02/19/只用200行Go代码写一个自己的区块链!/" class="leancloud_visitors" data-flag-title="只用200行Go代码写一个自己的区块链!">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>区块链是目前最热门的话题，广大读者可能都听说过比特币，或许还有智能合约，相信大家都非常想了解这一切是如何工作的。这篇文章就是帮助你使用Go语言来实现一个简单的区块链，用不到 200 行代码来揭示区块链的原理！</p>
+</blockquote>
+<p>采用人类平静时的心跳数据（BPM心率）作为这篇文章中的示例数据。让我们先来统计一下你一分钟内的心跳数，然后记下来，这个数字可能会在接下来的内容中用到。</p>
+<p>通过本文，你将可以做到：</p>
+<ul>
+<li>创建自己的区块链</li>
+<li>理解hash函数是如何保持区块链的完整性</li>
+<li>如何创造并添加新的块</li>
+<li>多个节点如何竞争生成块</li>
+<li>通过浏览器来查看整个链</li>
+<li>所有其他关于区块链的基础知识</li>
+</ul>
+<p>但是，对于比如工作量证明算法（PoW）以及权益证明算法（PoS）这类的共识算法文章中将不会涉及。同时为了让你更清楚得查看区块链以及块的添加，我们将网络交互的过程简化了，关于 P2P 网络比如“全网广播”这个过程等内容将在后续文章中补上。<br><a id="more"></a></p>
+<h2 id="让我们开始吧！"><a href="#让我们开始吧！" class="headerlink" title="让我们开始吧！"></a>让我们开始吧！</h2><p>我们假设你已经具备一点 Go 语言的开发经验。在安装和配置Go开发环境后之后，我们还要获取以下一些依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go get github.com/davecgh/go-spew/spew</div></pre></td></tr></table></figure>
+<p>spew可以帮助我们在console中直接查看struct和slice这两种数据结构。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go get github.com/gorilla/mux</div></pre></td></tr></table></figure>
+<p>Gorilla 的 mux 包非常流行， 我们用它来写 web handler。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go get github.com/joho/godotenv</div></pre></td></tr></table></figure>
+<p>godotenv可以帮助我们读取项目根目录中的.env配置文件，这样我们就不用将http port之类的配置硬编码进代码中了。比如像这样:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ADDR=8080</div></pre></td></tr></table></figure>
+<p>接下来，我们创建一个 main.go 文件。之后我们的大部分工作都围绕这个文件，让我开始编码吧！</p>
+<h2 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h2><p>我们将所有的依赖包以声明的方式导入进去:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">package main</div><div class="line"></div><div class="line">import (</div><div class="line">    &quot;crypto/sha256&quot;</div><div class="line">    &quot;encoding/hex&quot;</div><div class="line">    &quot;encoding/json&quot;</div><div class="line">    &quot;io&quot;</div><div class="line">    &quot;log&quot;</div><div class="line">    &quot;net/http&quot;</div><div class="line">    &quot;os&quot;</div><div class="line">    &quot;time&quot;</div><div class="line"></div><div class="line">    &quot;github.com/davecgh/go-spew/spew&quot;</div><div class="line">    &quot;github.com/gorilla/mux&quot;</div><div class="line">    &quot;github.com/joho/godotenv&quot;</div><div class="line">)</div></pre></td></tr></table></figure>
+<h2 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h2><p>接着我们来定义一个结构体，它代表组成区块链的每一个块的数据模型：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">type Block struct &#123;</div><div class="line">    Index     int</div><div class="line">    Timestamp string</div><div class="line">    BPM       int</div><div class="line">    Hash      string</div><div class="line">    PrevHash  string</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Index 是这个块在整个链中的位置</li>
+<li>Timestamp 显而易见就是块生成时的时间戳</li>
+<li>Hash 是这个块通过 SHA256 算法生成的散列值</li>
+<li>PrevHash 代表前一个块的 SHA256 散列值</li>
+<li>BPM 每分钟心跳数，也就是心率。</li>
+</ul>
+<p>接着，我们再定义一个结构表示整个链，最简单的表示形式就是一个 Block 的 slice：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var Blockchain []Block</div></pre></td></tr></table></figure>
+<p>我们使用散列算法（SHA256）来确定和维护链中块和块正确的顺序，确保每一个块的 PrevHash 值等于前一个块中的 Hash 值，这样就以正确的块顺序构建出链.</p>
+<h2 id="散列和生成块"><a href="#散列和生成块" class="headerlink" title="散列和生成块"></a>散列和生成块</h2><p>我们为什么需要散列？主要是两个原因：</p>
+<ul>
+<li><p>在节省空间的前提下去唯一标识数据。散列是用整个块的数据计算得出，在我们的例子中，将整个块的数据通过 SHA256 计算成一个定长不可伪造的字符串。</p>
+</li>
+<li><p>维持链的完整性。通过存储前一个块的散列值，我们就能够确保每个块在链中的正确顺序。任何对数据的篡改都将改变散列值，同时也就破坏了链。以我们从事的医疗健康领域为例，比如有一个恶意的第三方为了调整“人寿险”的价格，而修改了一个或若干个块中的代表不健康的 BPM 值，那么整个链都变得不可信了。</p>
+</li>
+</ul>
+<p>我们接着写一个函数，用来计算给定的数据的 SHA256 散列值：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">func calculateHash(block Block) string &#123;</div><div class="line">	record := string(block.Index) + block.Timestamp + string(block.BPM) + block.PrevHash</div><div class="line">	h := sha256.New()</div><div class="line">	h.Write([]byte(record))</div><div class="line">	hashed := h.Sum(nil)</div><div class="line">	return hex.EncodeToString(hashed)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个 calculateHash 函数接受一个块，通过块中的 Index，Timestamp，BPM，以及 PrevHash 值来计算出 SHA256 散列值。接下来我们就能便携一个生成块的函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">func generateBlock(oldBlock Block, BPM int) (Block, error) &#123;</div><div class="line">	var newBlock Block</div><div class="line"></div><div class="line">	t := time.Now()</div><div class="line">	newBlock.Index = oldBlock.Index + 1</div><div class="line">	newBlock.Timestamp = t.String()</div><div class="line">	newBlock.BPM = BPM</div><div class="line">	newBlock.PrevHash = oldBlock.Hash</div><div class="line">	newBlock.Hash = calculateHash(newBlock)</div><div class="line"></div><div class="line">	return newBlock, nil</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中，Index 是从给定的前一块的 Index 递增得出，时间戳是直接通过 time.Now() 函数来获得的，Hash 值通过前面的 calculateHash 函数计算得出，PrevHash 则是给定的前一个块的 Hash 值。</p>
+<h2 id="校验块"><a href="#校验块" class="headerlink" title="校验块"></a>校验块</h2><p>搞定了块的生成，接下来我们需要有函数帮我们判断一个块是否有被篡改。检查 Index 来看这个块是否正确得递增，检查 PrevHash 与前一个块的 Hash 是否一致，再来通过 calculateHash 检查当前块的 Hash 值是否正确。通过这几步我们就能写出一个校验函数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">func isBlockValid(newBlock, oldBlock Block) bool &#123;</div><div class="line">	if oldBlock.Index + 1 != newBlock.Index &#123;</div><div class="line">		return false</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	if oldBlock.Hash != newBlock.PrevHash &#123;</div><div class="line">		return false</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	if calculateHash(newBlock) != newBlock.Hash &#123;</div><div class="line">		return false</div><div class="line">	&#125;</div><div class="line">	return true</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>除了校验块以外，我们还会遇到一个问题：两个节点都生成块并添加到各自的链上，那我们应该以谁为准？这里的细节我们留到下一篇文章，这里先让我们记住一个原则：始终选择最长的链。</p>
+<p>通常来说，更长的链表示它的数据（状态）是更新的，所以我们需要一个函数</p>
+<p>能帮我们将本地的过期的链切换成最新的链：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">func replaceChain(newBlocks []Block) &#123;</div><div class="line">	if len(newBlocks) &gt; len(Blockchain) &#123;</div><div class="line">		Blockchain = newBlocks</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>到这一步，我们基本就把所有重要的函数完成了。接下来，我们需要一个方便直观的方式来查看我们的链，包括数据及状态。通过浏览器查看 web 页面可能是最合适的方式！</p>
+<h2 id="Web服务"><a href="#Web服务" class="headerlink" title="Web服务"></a>Web服务</h2><p>我猜你一定对传统的 web 服务及开发非常熟悉，所以这部分你肯定一看就会。<br>借助 Gorilla/mux 包，我们先写一个函数来初始化我们的 web 服务：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">func run() error &#123;</div><div class="line">	mux := makeMuxRouter()</div><div class="line">	httpAddr := os.Getenv(&quot;ADDR&quot;)</div><div class="line">	log.Println(&quot;Listening on &quot;, os.Getenv(&quot;ADDR&quot;))</div><div class="line">	s := &amp;http.Server&#123;</div><div class="line">		Addr: &quot;:&quot; + httpAddr,</div><div class="line">		Handler: mux,</div><div class="line">		ReadTimeout: 10 * time.Second,</div><div class="line">		WriteTimeout: 10 * time.Second,</div><div class="line">		MaxHeaderBytes: 1 &lt;&lt; 20,</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	if err := s.ListenAndServe(); err != nil &#123;</div><div class="line">		return err</div><div class="line">	&#125;</div><div class="line">	return nil</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>其中的端口号是通过前面提到的 .env 来获得，再添加一些基本的配置参数，这个 web 服务就已经可以 listen and serve 了！ </p>
+<p>接下来我们再来定义不同 endpoint 以及对应的 handler。例如，对“/”的 GET 请求我们可以查看整个链，“/”的 POST 请求可以创建块。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">func makeMuxRouter() http.Handler &#123;</div><div class="line">	muxRouter := mux.NewRouter()</div><div class="line">	muxRouter.HandleFunc(&quot;/&quot;, handleGetBlockchain).Methods(&quot;GET&quot;)</div><div class="line">	muxRouter.HandleFunc(&quot;/&quot;, handleWriteBlock).Methods(&quot;POST&quot;)</div><div class="line">	return muxRouter</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>GET 请求的 handler：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">func handleGetBlockchain(w http.ResponseWriter, r *http.Request) &#123;</div><div class="line">	bytes, err := json.MarshalIndent(Blockchain, &quot;&quot;, &quot; &quot;)</div><div class="line">	if err != nil &#123;</div><div class="line">		http.Error(w, err.Error(), http.StatusInternalServerError)</div><div class="line">		return</div><div class="line">	&#125;</div><div class="line">	io.WriteString(w, string(bytes))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>为了简化，我们直接以 JSON 格式返回整个链，你可以在浏览器中访问 localhost:8080 或者 127.0.0.1:8080 来查看（这里的8080就是你在 .env 中定义的端口号 ADDR）。</p>
+<p>POST 请求的 handler 稍微有些复杂，我们先来定义一下 POST 请求的 payload：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">type Message struct &#123;</div><div class="line">    BPM int</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再看看handler的实现:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">func handleWriteBlock(w http.ResponseWriter, r *http.Request) &#123;</div><div class="line">	var m Message</div><div class="line"></div><div class="line">	decoder := json.NewDecoder(r.Body)</div><div class="line">	if err := decoder.Decode(&amp;m); err != nil &#123;</div><div class="line">		responsedWithJSON(w, r, http.StatusBadRequest, r.Body)</div><div class="line">		return</div><div class="line">	&#125;</div><div class="line">	defer r.Body.Close()</div><div class="line"></div><div class="line">	newBlock, err := generateBlock(Blockchain[len(Blockchain) - 1], m.BPM)</div><div class="line">	if err != nil &#123;</div><div class="line">		responsedWithJSON(w, r, http.StatusInternalServerError, m)</div><div class="line">		return</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	if isBlockValid(newBlock, Blockchain[len(Blockchain) - 1]) &#123;</div><div class="line">		newBlockchain := append(Blockchain, newBlock)</div><div class="line">		replaceChain(newBlockchain)</div><div class="line">		spew.Dump(Blockchain)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	responsedWithJSON(w, r, http.StatusCreated, newBlock)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们的 POST 请求体中可以使用上面定义的 payload，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;&quot;BPM&quot;:75&#125;</div></pre></td></tr></table></figure>
+<p>还记得前面我们写的 generateBlock 这个函数吗？它接受一个“前一个块”参数，和一个 BPM 值。POST handler 接受请求后就能获得请求体中的 BPM 值，接着借助生成块的函数以及校验块的函数就能生成一个新的块了！</p>
+<p>除此之外，你也可以：</p>
+<ul>
+<li><p>使用spew.Dump 这个函数可以以非常美观和方便阅读的方式将 struct、slice 等数据打印在控制台里，方便我们调试。</p>
+</li>
+<li><p>测试 POST 请求时，可以使用 POSTMAN 这个 chrome 插件，相比 curl它更直观和方便。</p>
+</li>
+</ul>
+<p>POST 请求处理完之后，无论创建块成功与否，我们需要返回客户端一个响应：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">func responsedWithJSON(w http.ResponseWriter, r *http.Request, code int, payload interface&#123;&#125;) &#123;</div><div class="line">	response, err := json.MarshalIndent(payload, &quot;&quot;, &quot; &quot;)</div><div class="line">	if err != nil &#123;</div><div class="line">		w.WriteHeader(http.StatusInternalServerError)</div><div class="line">		w.Write([]byte(&quot;HTTP 500: Internal Server Error&quot;))</div><div class="line">		return</div><div class="line">	&#125;</div><div class="line">	w.WriteHeader(code)</div><div class="line">	w.Write(response)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="快要大功告成"><a href="#快要大功告成" class="headerlink" title="快要大功告成"></a>快要大功告成</h2><p>接下来，我们把这些关于区块链的函数，web 服务的函数“组装”起来：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">func main() &#123;</div><div class="line">	err := godotenv.Load()</div><div class="line">	if err != nil &#123;</div><div class="line">		log.Fatal(err)</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	go func() &#123;</div><div class="line">		t := time.Now()</div><div class="line">		genesisBlock := Block&#123;0, t.String(), 0, &quot;&quot;, &quot;&quot;&#125;</div><div class="line">		spew.Dump(genesisBlock)</div><div class="line">		Blockchain = append(Blockchain, genesisBlock)</div><div class="line">	&#125;()</div><div class="line">	log.Fatal(run())</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这里的 genesisBlock （创世块）是 main 函数中最重要的部分，通过它来初始化区块链，毕竟第一个块的 PrevHash 是空的。</p>
+<h2 id="完成了"><a href="#完成了" class="headerlink" title="完成了"></a>完成了</h2><p>让我们来启动它：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">go run main.go</div></pre></td></tr></table></figure>
+<p>在终端中，我们可以看到 web 服务器启动的日志信息，并且打印出了创世块的信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">(main.Block) &#123;</div><div class="line">2018/02/19 10:52:20 Listening on  8080</div><div class="line"> Index: (int) 0,</div><div class="line"> Timestamp: (string) (len=52) &quot;2018-02-19 10:52:20.6088839 +0800 CST m=+0.029017401&quot;,</div><div class="line"> BPM: (int) 0,</div><div class="line"> Hash: (string) &quot;&quot;,</div><div class="line"> PrevHash: (string) &quot;&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着我们打开浏览器，访问 localhost:8080 这个地址，我们可以看到页面中展示了当前整个区块链的信息（当然，目前只有一个创世块）：</p>
+<p><img src="http://ou37fuqh7.bkt.clouddn.com/blockchain-100code.png" alt="image"></p>
+<p>接着，我们再通过 POSTMAN 来发送一些 POST 请求：</p>
+<p><img src="http://ou37fuqh7.bkt.clouddn.com/blockchain-100code1.png" alt="image"></p>
+<p>刷新刚才的页面，现在的链中多了一些块，正是我们刚才生成的，同时你们可以看到，块的顺序和散列值都正确。</p>
+<p><img src="http://ou37fuqh7.bkt.clouddn.com/blockchain-100code2.png" alt="image"></p>
+<h2 id="下一步"><a href="#下一步" class="headerlink" title="下一步"></a>下一步</h2><p>刚刚我们完成了一个自己的区块链，虽然很简单（陋），但它具备块生成、散列计算、块校验等基本能力。接下来你就可以继续深入的学习区块链的其他重要知识，比如工作量证明、权益证明这样的共识算法，或者是智能合约、Dapp、侧链等等。</p>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a href="https://github.com/mycoralhealth/blockchain-tutorial/blob/master/main.go" target="_blank" rel="external">https://github.com/mycoralhealth/blockchain-tutorial/blob/master/main.go</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="ycyoes wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的二维码，订阅我的微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏支持</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay-reward.jpg" alt="ycyoes WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay-reward.jpg" alt="ycyoes Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/区块链，智能合约，网络编程，共识机制，点对点/" rel="tag"># 区块链，智能合约，网络编程，共识机制，点对点</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/21/Go语言之defer/" rel="next" title="Go语言之defer">
+                <i class="fa fa-chevron-left"></i> Go语言之defer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/24/Go语言之unsafe包介绍及使用/" rel="prev" title="Go语言之unsafe包介绍及使用">
+                Go语言之unsafe包介绍及使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/portrait.jpg"
+               alt="ycyoes" />
+          <p class="site-author-name" itemprop="name">ycyoes</p>
+           
+              <p class="site-description motion-element" itemprop="description">personal blog sharing ...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ycyoes" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/ycyoes" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/u/6fe5805f9bb2" title="简书" target="_blank">简书</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#让我们开始吧！"><span class="nav-number">1.</span> <span class="nav-text">让我们开始吧！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#导入依赖"><span class="nav-number">2.</span> <span class="nav-text">导入依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据模型"><span class="nav-number">3.</span> <span class="nav-text">数据模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#散列和生成块"><span class="nav-number">4.</span> <span class="nav-text">散列和生成块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#校验块"><span class="nav-number">5.</span> <span class="nav-text">校验块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web服务"><span class="nav-number">6.</span> <span class="nav-text">Web服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快要大功告成"><span class="nav-number">7.</span> <span class="nav-text">快要大功告成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完成了"><span class="nav-number">8.</span> <span class="nav-text">完成了</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下一步"><span class="nav-number">9.</span> <span class="nav-text">下一步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关链接"><span class="nav-number">10.</span> <span class="nav-text">相关链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ycyoes</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyt95geaN';
+      var conf = '1d1c070b6d1ae9a4be89dd9cbd09e121';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("VhXqTkplVtG2QPDH10tt1lQn-gzGzoHsz", "2JvEz0C6VkkXPI481iVafkN3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Go,延迟," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="定义defer语句被用于预定对一个函数的调用。我们把这类被defer语句调用的函数称为延迟函数。">
+<meta name="keywords" content="Go,延迟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言之defer">
+<meta property="og:url" content="http://www.ycyoes.com/2018/01/21/Go语言之defer/index.html">
+<meta property="og:site_name" content="ycyoes&#39;s blog">
+<meta property="og:description" content="定义defer语句被用于预定对一个函数的调用。我们把这类被defer语句调用的函数称为延迟函数。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-09T06:12:19.228Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Go语言之defer">
+<meta name="twitter:description" content="定义defer语句被用于预定对一个函数的调用。我们把这类被defer语句调用的函数称为延迟函数。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.ycyoes.com/2018/01/21/Go语言之defer/"/>
+
+
+
+
+
+  <title>Go语言之defer | ycyoes's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+    <a href="https://github.com/ycyoes"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ycyoes's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">open, sharing...</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.ycyoes.com/2018/01/21/Go语言之defer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="ycyoes">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/portrait.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ycyoes's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Go语言之defer</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-21T22:32:46+08:00">
+                2018-01-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Go/" itemprop="url" rel="index">
+                    <span itemprop="name">Go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/01/21/Go语言之defer/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/01/21/Go语言之defer/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2018/01/21/Go语言之defer/" class="leancloud_visitors" data-flag-title="Go语言之defer">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>defer语句被用于预定对一个函数的调用。我们把这类被defer语句调用的函数称为延迟函数。<br><a id="more"></a></p>
+<blockquote>
+<p>注意，defer语句只能出现在函数或方法的内部。</p>
+</blockquote>
+<p><strong>一条defer语句总是以关键字defer开始。在defer的右边还必会有一条表达式语句,且它们之间要以空格” “分隔</strong>，如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">defer fmt.Println(&quot;The finishing touches.&quot;)</div></pre></td></tr></table></figure></p>
+<p>这里的表达式语句必须代表一个函数或方法的调用。注意，既然是表达式语句，那么一些调用表达式就是不被允许出现在这里的。比如，针对各种内建函数的那些调用表达式。因为它们不能被称为表达式语句。另外，在这个位置上出现的表达式语句是不能被圆括号括起来的。</p>
+<p>　　<strong>defer语句的执行时机总是在直接包含它的那个函数把流程控制权交还给它的调用方的前一刻，无论defer语句出现在外围函数的函数体中的哪一个位置上</strong>。</p>
+<p>具体分为下面几种情况：
+　　</p>
+<ul>
+<li>当外围函数的函数体中的相应语句全部被正常执行完毕的时候，只有在该函数中的所有defer语句都被执行完毕之后该函数才会真正地结束执行。
+　　</li>
+<li>当外围函数的函数体中的return语句被执行的时候，只有在该函数中的所有defer语句都被执行完毕之后该函数才会真正地返回。
+　　</li>
+<li>当在外围函数中有运行时恐慌发生的时候，只有在该函数中的所有defer语句都被执行完毕之后该运行时恐慌才会真正地被扩散至该函数的调用方。
+　　<blockquote>
+<p>总之，外围函数的执行的结束会由于其中defer语句的执行而被推迟。</p>
+</blockquote>
+</li>
+</ul>
+<p>正因为defer语句有着这样的特性，所以它成为了执行释放资源或异常处理等收尾任务的首选。</p>
+<h2 id="defer优势"><a href="#defer优势" class="headerlink" title="defer优势"></a>defer优势</h2><p>使用defer语句的优势有两个：</p>
+<ol>
+<li><p>收尾任务总会被执行，我们不会再因粗心大意而造成资源的浪费；</p>
+</li>
+<li><p>我们可以把它们放到外围函数的函数体中的任何地方（一般是函数体开始处或紧跟在申请资源的语句的后面），而不是只能放在函数体的最后。这使得代码逻辑变得更加清晰，并且收尾任务是否被合理的指定也变得一目了然。</p>
+</li>
+</ol>
+<p>在defer语句中，我们调用的函数不但可以是已声明的命名函数，还可以是临时编写的匿名函数，就像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">defer func() &#123; </div><div class="line">       fmt.Println(&quot;The finishing touches.&quot;)    </div><div class="line">&#125;()</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，一个针对匿名函数的调用表达式是由一个函数字面量和一个代表了调用操作的一对圆括号组成的。</p>
+</blockquote>
+<p>　　我们在这里选择匿名函数的好处是可以使该函数的收尾任务的内容更加直观。不过，我们也可以把比较通用的收尾任务单独放在一个命名函数中，然后再将其添加到需要它的defer语句中。无论在defer关键字右边的是命名函数还是匿名函数，我们都可以称之为延迟函数。因为它总是会被延迟到外围函数执行结束前一刻才被真正的调用。<br>每当defer语句被执行的时候，传递给延迟函数的参数都会以通常的方式被求值。如下例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">func begin(funcName string) string &#123;</div><div class="line">    fmt.Printf(&quot;Enter function %s.\n&quot;, funcName)    </div><div class="line">    return funcName</div><div class="line">&#125;</div><div class="line">func end(funcName string) string &#123;</div><div class="line">    fmt.Printf(&quot;Exit function %s.\n&quot;, funcName)    </div><div class="line">    return funcName</div><div class="line">&#125;</div><div class="line">func record() &#123;</div><div class="line">    defer end(begin(&quot;record&quot;))    </div><div class="line">    fmt.Println(&quot;In function record.&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>outputs:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">　　Enter function record.</div><div class="line">　　In function record.</div><div class="line">　　Exit function record.</div></pre></td></tr></table></figure></p>
+<p>示例中，调用表达式begin(“record”)是作为record函数的参数出现的。它会在defer语句被执行的时候被求值。也就是说，在record函数的函数体被执行之处，begin函数就被调用了。然而，end函数却是在外围函数record执行结束的前一刻被调用的。</p>
+<p>这样做除了可以避免参数值在延迟函数被真正调用之前再次发生改变而给该函数的执行造成影响之外，还是处于同一条defer语句可能会被多次执行的考虑。如下例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">func printNumbers() &#123;</div><div class="line">    for i := 0; i &lt; 5; i++ &#123;        </div><div class="line">      defer fmt.Printf(&quot;%d &quot;, i)    </div><div class="line">    &#125;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>outputs:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">　　4 3 2 1 0</div></pre></td></tr></table></figure>
+<p>　　在for语句的每次迭代的过程中都会执行一次其中的defer语句。在第一次迭代中，针对延迟函数的调用表达式最终会是fmt.Printf(“%d”, 0)。这是由于在defer语句被执行的时候，参数i先被求值为了0，随后这个值被代入到了原来的调用表达式中，并形成了最终的延迟函数调用表达式。显然，这时的调用表达式已经与原来的表达式有所不同了。所以，Go语言会把代入参数值之后的调用表达式另行存储。以此类推，后面几次迭代所产生的延迟函数调用表达式依次为：<br>　　<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fmt.Printf(&quot;%d &quot;, 1)</div><div class="line">fmt.Printf(&quot;%d &quot;, 2)</div><div class="line">fmt.Printf(&quot;%d &quot;, 3)</div><div class="line">fmt.Printf(&quot;%d &quot;, 4)</div></pre></td></tr></table></figure></p>
+<h2 id="defer语句执行顺序"><a href="#defer语句执行顺序" class="headerlink" title="defer语句执行顺序"></a>defer语句执行顺序</h2><p>　　对延迟函数调用表达式的求值顺序是与它们所在的defer语句被执行的顺序完全相反的。每当Go语言把已代入参数值的延迟函数调用表达式另行存储后，还会把它追加到一个专门为当前外围函数存储延迟函数调用表达式的列表中。而这个列表总是LIFO(Last In First Out,即后进先出)的。因此，这些延迟函数调用表达式的求值顺序会是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">fmt.Printf(&quot;%d &quot;, 4)</div><div class="line">fmt.Printf(&quot;%d &quot;, 3)</div><div class="line">fmt.Printf(&quot;%d &quot;, 2)</div><div class="line">fmt.Printf(&quot;%d &quot;, 1)</div><div class="line">fmt.Printf(&quot;%d &quot;, 0)</div></pre></td></tr></table></figure>
+<p>　例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">func appendNumbers(ints []int) (result []int) &#123;</div><div class="line">    result = append(ints, 1)    </div><div class="line">    fmt.Println(result)    </div><div class="line">    defer func() &#123;  </div><div class="line">          result = append(result, 2)    </div><div class="line">    &#125;()</div><div class="line">    result = append(result, 3)    </div><div class="line">    fmt.Println(result)    defer func() &#123; </div><div class="line">           result = append(result, 4)    </div><div class="line">    &#125;()</div><div class="line">    result = append(result, 5)    </div><div class="line">    fmt.Println(result)    defer func() &#123;</div><div class="line">            result = append(result, 6)    </div><div class="line">    &#125;()    </div><div class="line">    return result</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>outputs:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">　　[0 1 3 5 6 4 2]</div></pre></td></tr></table></figure>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">func printNumbers() &#123;</div><div class="line">    for i := 0; i &lt; 5; i++ &#123;     </div><div class="line">       defer func() &#123;      </div><div class="line">             fmt.Printf(&quot;%d &quot;, i)     </div><div class="line">       &#125;()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>outputs:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">　　5 5 5 5 5</div></pre></td></tr></table></figure>
+<p>在defer语句被执行的时候传递给延迟函数的参数都会被求值，但是延迟函数调用表达式并不会在那时被求值。当我们把<br><figure class="highlight plain"><figcaption><span>", i)```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">改为</div></pre></td></tr></table></figure></p>
+<p>defer func() {<br>            fmt.Printf(“%d “, i)<br>}()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　之后，虽然变量i依然是有效的，但是它所代表的值却已经完全不同了。在for语句的迭代过程中，其中defer语句被执行了5次。但是，由于我们并没有给延迟函数传递任何参数，所以Go语言运行时系统也就不需要对任何作为延迟函数的参数值的表达式进行求值（因为它们根本不存在）。在for语句被执行完毕的时候，共有5个延迟函数调用表达式被存储到了它们的专属列表中。注意，被存储在专属列表中的是5个相同的调用表达式：</div></pre></td></tr></table></figure></p>
+<p>defer func() {<br>            fmt.Printf(“%d “, i)<br>}()<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　在printNumbers函数的执行即将结束的时候，那个专属列表中的延迟函数调用表达式就会被逆序的取出并被逐个的求值。然而，这时的变量i已经被修改为了5。因此，对5个相同的调用表达式的求值都会使标准输出上打印出5.</div><div class="line">　　如何修正这个问题呢？</div><div class="line">　　将defer语句修改为：</div></pre></td></tr></table></figure></p>
+<p>defer func(i int) {<br>            fmt.Printf(“%d “, i)<br>}(i)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　我们虽然还是以匿名函数作为延迟函数，但是却为这个匿名函数添加了一个参数声明，并在代表调用操作的圆括号中加入了作为参数的变量i。这样，在defer语句被执行的时候，传递给延迟函数的这个参数i就会被求值。最终的延迟函数调用表达式也会类似于：</div></pre></td></tr></table></figure></p>
+<p>defer func(i int) {<br>            fmt.Printf(“%d “, i)<br>}(0)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">　　又因为延迟函数声明中的参数i屏蔽了在for语句中声明的变量i，所以在延迟函数被执行的时候，其中那条打印语句中所使用的i值即为传递给延迟函数的那个参数值。</div><div class="line"> </div><div class="line">　　如果延迟函数是一个匿名函数，并且在外围函数的声明中存在命名的结果声明，那么在延迟函数中的代码是可以对命名结果的值进行访问和修改的。如下例：</div><div class="line"></div><div class="line">```　　</div><div class="line">func modify(n int) (number int) &#123;</div><div class="line">    fmt.Println(number)    </div><div class="line">    defer func() &#123; </div><div class="line">           number += n    </div><div class="line">    &#125;()</div><div class="line">    number++    </div><div class="line">    return</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li>modify(2)，结果为：3 </li>
+</ul>
+<p>虽然在延迟函数的声明中可以包含结果声明，但是其返回的结果值会在它被执行完毕时丢弃。因此，作为惯例，我们在编写延迟函数的声明的时候不会为其添加结果声明。另一方面，推荐以传参的方式提供延迟函数所需的外部值。如下例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">func modify(n int) (number int) &#123;</div><div class="line">    fmt.Println(number)   </div><div class="line">     defer func(plus int) (result int) &#123;</div><div class="line">             result = n + plus        </div><div class="line">             number += result        </div><div class="line">             return    </div><div class="line">    &#125;(3)</div><div class="line">    number++    </div><div class="line">    return</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>　　modify(2)，结果为：6</li>
+</ul>
+<p>我们可以把想要传递给延迟函数的参数值依照规则放入到那个代表调用操作的圆括号中，就像调用普通函数那样。另一方面，虽然我们在延迟函数的函数体中返回了结果值，但是却不会产生任何效果。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="ycyoes wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎您扫一扫上面的二维码，订阅我的微信公众号！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赞赏支持</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechatpay-reward.jpg" alt="ycyoes WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay-reward.jpg" alt="ycyoes Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go/" rel="tag"># Go</a>
+          
+            <a href="/tags/延迟/" rel="tag"># 延迟</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/18/心理咨询师三级目录/" rel="next" title="心理咨询师目录">
+                <i class="fa fa-chevron-left"></i> 心理咨询师目录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/19/只用200行Go代码写一个自己的区块链!/" rel="prev" title="只用200行Go代码写一个自己的区块链!">
+                只用200行Go代码写一个自己的区块链! <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="SOHUCS"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/portrait.jpg"
+               alt="ycyoes" />
+          <p class="site-author-name" itemprop="name">ycyoes</p>
+           
+              <p class="site-description motion-element" itemprop="description">personal blog sharing ...</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">52</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ycyoes" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/ycyoes" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                    
+                      Twitter
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.jianshu.com/u/6fe5805f9bb2" title="简书" target="_blank">简书</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#defer优势"><span class="nav-number">1.1.</span> <span class="nav-text">defer优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#defer语句执行顺序"><span class="nav-number">1.2.</span> <span class="nav-text">defer语句执行顺序</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ycyoes</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cyt95geaN';
+      var conf = '1d1c070b6d1ae9a4be89dd9cbd09e121';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("VhXqTkplVtG2QPDH10tt1lQn-gzGzoHsz", "2JvEz0C6VkkXPI481iVafkN3");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
